@@ -1,0 +1,32 @@
+info:
+  name: get-token
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://iam-admin.{{DOMAIN}}/realms/{{REALM}}/protocol/openid-connect/token
+  headers:
+    - name: Content-Type
+      value: application/x-www-form-urlencoded
+  body:
+    type: form-urlencoded
+    data:
+      - name: grant_type
+        value: password
+      - name: client_id
+        value: "{{client_id}}"
+      - name: client_credentials
+        value: "{{client_credentials}}"
+        disabled: true
+      - name: username
+        value: "{{username}}"
+      - name: password
+        value: "{{password}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
